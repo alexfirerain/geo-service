@@ -1,17 +1,14 @@
 package ru.netology.geo;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.entity.Country;
-
 import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class GeoServiceImplTest {
     private final GeoServiceImpl geoService = new GeoServiceImpl();
 
-    private String generateRandIpStartingWith(int prefix) {
+    private String fakeIPv4startingWith(int prefix) {
         StringBuilder randomIP = new StringBuilder(String.valueOf(prefix));
         for (int i = 0; i < 3; i++)
             randomIP.append(".").append(new Random().nextInt(256));
@@ -20,19 +17,19 @@ class GeoServiceImplTest {
 
 
     @Test
-    void returns_rus_when_172() {
-        String any172IP = generateRandIpStartingWith(172);
-        System.out.println(any172IP);
+    void when_172_returns_rus() {
+        String any172ip = fakeIPv4startingWith(172);
         assertEquals(Country.RUSSIA,
-                geoService.byIp(any172IP).getCountry());
+                geoService.byIp(any172ip).getCountry());
     }
 
     @Test
-    void returns_usa_when_96() {
-        String any96IP = generateRandIpStartingWith(96);
-        System.out.println(any96IP);
+    void when_96_returns_usa() {
+        String any96ip = fakeIPv4startingWith(96);
         assertEquals(Country.USA,
-                geoService.byIp(any96IP).getCountry());
+                geoService.byIp(any96ip).getCountry());
     }
+    
+
 
 }
